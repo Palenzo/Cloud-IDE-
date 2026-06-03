@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,7 @@ export default function Home() {
 
   async function newProject() {
     try {
-      const res = await fetch("http://localhost:3000/container/createcontainer", {
+      const res = await fetch(`${API_URL}/container/createcontainer`, {
         method: "POST",
         body: JSON.stringify({ template: "node" }),
         headers: {

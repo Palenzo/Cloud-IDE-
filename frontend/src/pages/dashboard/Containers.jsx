@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState, useEffect } from 'react';
 import { TailwindcssButtons } from "@/components/ui/tailwindcss-buttons";
 import { HoverEffect } from "@/components/ui/card_container";
@@ -7,7 +8,7 @@ import Loader from '@/components/ui/Loader';
 
 const getContainerStatus = async (containerId) => {
   const tok = JSON.parse(localStorage.getItem("token"));
-  const response = await fetch(`http://localhost:3000/container/details/${containerId}`, {
+  const response = await fetch(`${API_URL}/container/details/${containerId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

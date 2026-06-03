@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -16,7 +17,7 @@ const BugReports = () => {
     useEffect(() => {
         const fetchBugReports = async () => {
             try {
-                const response = await fetch("http://localhost:3000/dev/getAllBugReports", {
+                const response = await fetch(`${API_URL}/dev/getAllBugReports`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

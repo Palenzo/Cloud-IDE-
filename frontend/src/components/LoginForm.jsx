@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -61,7 +62,7 @@ export function LoginForm() {
   async function onSubmit(values) {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/auth/signin", {
+      const res = await fetch(`${API_URL}/auth/signin`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {

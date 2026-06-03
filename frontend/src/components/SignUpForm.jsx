@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -76,7 +77,7 @@ export function SignUpForm() {
     }
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/auth/signup", {
+      const res = await fetch(`${API_URL}/auth/signup`, {
         method: "POST",
         body: JSON.stringify(values),
         headers: {

@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { Outlet, useNavigate, Navigate, Link } from "react-router-dom";
 import Sidebar from "@/components/dashboard/Sidnav";
 import { useDispatch, useSelector } from "react-redux";
@@ -50,7 +51,7 @@ function DashboardLayout() {
     const fetchUserData = async () => {
       try {
         const tok = JSON.parse(localStorage.getItem("token"));
-        const response = await fetch("http://localhost:3000/user/getprofiledata", {
+        const response = await fetch(`${API_URL}/user/getprofiledata`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + tok.token,

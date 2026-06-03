@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { WobbleCard } from "@/components/ui/wobble-card";
 import { TailwindcssButtons } from "@/components/ui/tailwindcss-buttons";
 import { HoverEffect } from "@/components/ui/card_container";
@@ -21,7 +22,7 @@ function Home() {
   
 
 const getContainerStatus = async (containerId) => { 
-  const response = await fetch(`http://localhost:3000/container/details/${containerId}`, {
+  const response = await fetch(`${API_URL}/container/details/${containerId}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +37,7 @@ useEffect(() => {
   const fetchContainers = async () => {
     try {
       const tok = JSON.parse(localStorage.getItem("token"));
-      const response = await fetch("http://localhost:3000/container/listcontainers", {
+      const response = await fetch(`${API_URL}/container/listcontainers`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + tok.token,

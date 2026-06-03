@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -25,7 +26,7 @@ const ContainerHistory = () => {
     useEffect(() => {
         const fetchContainerHistory = async () => {
             try {
-                const response = await fetch("http://localhost:3000/admin/getAllContainerHistory", {
+                const response = await fetch(`${API_URL}/admin/getAllContainerHistory`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",

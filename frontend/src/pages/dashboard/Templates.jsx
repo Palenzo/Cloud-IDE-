@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState, useEffect } from "react";
 import { HoverEffect } from "@/components/dashboard/TemplateCard";
 import { motion } from "framer-motion";
@@ -23,7 +24,7 @@ const Templates = () => {
       try {
         const tok = JSON.parse(localStorage.getItem("token"));
         // console.log(tok);
-        const response = await fetch("http://localhost:3000/getAllTemplates", {
+        const response = await fetch(`${API_URL}/getAllTemplates`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + tok.token,

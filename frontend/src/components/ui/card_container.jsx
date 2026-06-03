@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { Link } from 'react-router-dom';
@@ -14,7 +15,7 @@ import Swal from 'sweetalert2';
 
 const getContainerStatus = async (containerId, token) => {
   try {
-    const response = await fetch(`http://localhost:3000/container/details/${containerId}`, {
+    const response = await fetch(`${API_URL}/container/details/${containerId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export const HoverEffect = ({
   const fetchContainers = async () => {
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:3000/container/listcontainers", {
+      const response = await fetch(`${API_URL}/container/listcontainers`, {
         method: "GET",
         headers: {
           Authorization: "Bearer " + token.token,
@@ -72,7 +73,7 @@ export const HoverEffect = ({
       
       let data = await response.json();
       const userContainers = await Promise.all(data.map(async (container) => {
-        const templateName = await fetch('http://localhost:3000/container/templateName/' + container.id, {
+        const templateName = await fetch(`${API_URL}/container/templateName/` + container.id, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + token.token,
@@ -143,7 +144,7 @@ export const HoverEffect = ({
     try {
       setContainerLoading(containerId, true);
       
-      const response = await fetch(`http://localhost:3000/container/delete/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/delete/${containerId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -191,7 +192,7 @@ export const HoverEffect = ({
     try {
       setContainerLoading(containerId, true);
       
-      const response = await fetch(`http://localhost:3000/container/stop/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/stop/${containerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -256,7 +257,7 @@ export const HoverEffect = ({
     try {
       setContainerLoading(containerId, true);
       
-      const response = await fetch(`http://localhost:3000/container/start/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/start/${containerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -335,7 +336,7 @@ export const HoverEffect = ({
       const containerId = filteredItems[index].id;
       setContainerLoading(containerId, true);
       
-      const response = await fetch(`http://localhost:3000/container/edit/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/edit/${containerId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

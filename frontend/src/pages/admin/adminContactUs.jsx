@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const AdminContactUs = () => {
   // Fetch all contact messages
   const fetchMessages = async () => {
     try {
-      const response = await fetch('http://localhost:3000/admin/getAllContactUs', {
+      const response = await fetch(`${API_URL}/admin/getAllContactUs`, {
         headers: {
           'Authorization': `Bearer ${token.token}`
         }
@@ -50,7 +51,7 @@ const AdminContactUs = () => {
   // Delete message handler
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/admin/deleteContactUs`, {
+      const response = await fetch(`${API_URL}/admin/deleteContactUs`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token.token}`,

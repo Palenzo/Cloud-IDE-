@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -47,7 +48,7 @@ const AdditionalInfo = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3000/user/updateadditionalinfo', {
+      const response = await fetch(`${API_URL}/user/updateadditionalinfo`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

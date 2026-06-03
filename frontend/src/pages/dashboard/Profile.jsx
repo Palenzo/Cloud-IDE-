@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUserData, updateUserData, setEditMode } from "@/store/userSlice";
@@ -217,7 +218,7 @@ const Profile = () => {
   // Update the fetchContainerStats function
   const fetchContainerStats = async () => {
     try {
-      const response = await fetch("http://localhost:3000/container/listcontainers", {
+      const response = await fetch(`${API_URL}/container/listcontainers`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token.token}`,
@@ -242,7 +243,7 @@ const Profile = () => {
 
   const fetchotherdata = async () => {
     try {
-      const response = await fetch("http://localhost:3000/user/getuserdata", {
+      const response = await fetch(`${API_URL}/user/getuserdata`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token.token}`,

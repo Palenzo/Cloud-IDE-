@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useState, useEffect } from "react";
 import { Bell, Clock, CheckCircle, AlertCircle, X } from "lucide-react";
 import { useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const NotificationBell = () => {
     const fetchNotifications = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3000/user/topnotification", {
+        const response = await fetch(`${API_URL}/user/topnotification`, {
           headers: {
             Authorization: "Bearer " + token.token,
           },
@@ -57,7 +58,7 @@ const NotificationBell = () => {
 
   const handleMarkAsRead = async (notificationId) => {
     try {
-      await fetch(`http://localhost:3000/user/notification/markread/${notificationId}`, {
+      await fetch(`${API_URL}/user/notification/markread/${notificationId}`, {
         method: 'PUT',
         headers: {
           Authorization: "Bearer " + token.token,
@@ -77,7 +78,7 @@ const NotificationBell = () => {
 
   const handleMarkAllAsRead = async () => {
     try {
-      await fetch("http://localhost:3000/user/notification/markallread", {
+      await fetch(`${API_URL}/user/notification/markallread`, {
         method: 'PUT',
         headers: {
           Authorization: "Bearer " + token.token,
@@ -95,7 +96,7 @@ const NotificationBell = () => {
 
   const handleDismiss = async (notificationId) => {
     try {
-      await fetch(`http://localhost:3000/user/notification/${notificationId}`, {
+      await fetch(`${API_URL}/user/notification/${notificationId}`, {
         method: 'DELETE',
         headers: {
           Authorization: "Bearer " + token.token,

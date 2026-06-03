@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useState, useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Wrapper from "./pages/Wrapper";
@@ -181,7 +182,7 @@ function App() {
   async function logOut() {
     const tok = JSON.parse(localStorage.getItem("token"));
     // console.log(tok);
-    const res = await fetch("http://localhost:3000/auth/signout", {
+    const res = await fetch(`${API_URL}/auth/signout`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -201,7 +202,7 @@ function App() {
   async function logIn() {
     const userDetails = JSON.parse(localStorage.getItem("token"));
     // console.log(userDetails);
-    const res = await fetch("http://localhost:3000/auth/login", {
+    const res = await fetch(`${API_URL}/auth/login`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

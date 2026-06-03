@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ const BugReports = () => {
     useEffect(() => {
         const fetchBugReports = async () => {
             try {
-                const response = await fetch("http://localhost:3000/admin/getAllBugReports", {
+                const response = await fetch(`${API_URL}/admin/getAllBugReports`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -517,7 +518,7 @@ const DateCell = ({ date, isCreated }) => {
 const BugReportTable = ({ token, bugReports, refreshTrigger, setBugReports, setRefreshTrigger, setPopupVisible, setPopupMessage, setPopupType, popupMessage, popupType, popupVisible }) => {
     const handleDeleteBugReport = async (id) => {
         try {
-            const responce = await fetch("http://localhost:3000/admin/deleteBugReport", {
+            const responce = await fetch(`${API_URL}/admin/deleteBugReport`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -661,7 +662,7 @@ const BugReportTable = ({ token, bugReports, refreshTrigger, setBugReports, setR
                                     <button
                                         onClick={async () => {
                                             try {
-                                                const response = await fetch("http://localhost:3000/admin/toggleBugReportSeen", {
+                                                const response = await fetch(`${API_URL}/admin/toggleBugReportSeen`, {
                                                     method: "POST",
                                                     headers: {
                                                         "Content-Type": "application/json",

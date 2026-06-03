@@ -1,8 +1,9 @@
+import { API_URL } from "@/config";
 let csrfToken = null;
 
 export const fetchCSRFToken = async () => {
   try {
-    const response = await fetch('http://localhost:3000/csrf-token', {
+    const response = await fetch(`${API_URL}/csrf-token`, {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

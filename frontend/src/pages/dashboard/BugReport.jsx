@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-hot-toast';
@@ -41,7 +42,7 @@ const BugReport = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('http://localhost:3000/user/addbugreport', {
+      const response = await fetch(`${API_URL}/user/addbugreport`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

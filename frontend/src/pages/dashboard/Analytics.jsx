@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { useState, useEffect, useMemo, Suspense } from "react";
 import { Chart } from "@/components/ui/chart";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
@@ -70,7 +71,7 @@ function Analytics() {
         throw new Error('No authentication token found');
       }
 
-      const response = await fetch("http://localhost:3000/user/getuserdata", {
+      const response = await fetch(`${API_URL}/user/getuserdata`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${tok.token}`,
@@ -102,7 +103,7 @@ function Analytics() {
       try {
         const tok = JSON.parse(localStorage.getItem("token"));
         // console.log(tok);
-        const res = await fetch("http://localhost:3000/getAllTemplates", {
+        const res = await fetch(`${API_URL}/getAllTemplates`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -135,7 +136,7 @@ function Analytics() {
     const fetchContainers = async () => {
       try {
         const tok = JSON.parse(localStorage.getItem("token"));
-        const response = await fetch("http://localhost:3000/container/listcontainers", {
+        const response = await fetch(`${API_URL}/container/listcontainers`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + tok.token,

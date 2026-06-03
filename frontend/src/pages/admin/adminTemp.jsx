@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -50,7 +51,7 @@ const AdminTemp = () => {
 
   const fetchTemplate = async () => {
     try {
-      const response = await fetch("http://localhost:3000/dev/getAllTemplates", {
+      const response = await fetch(`${API_URL}/dev/getAllTemplates`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -64,7 +65,7 @@ const AdminTemp = () => {
   }
 
   const fetchContainers = async () => {
-    const response = await fetch("http://localhost:3000/dev/getAllContainers", {
+    const response = await fetch(`${API_URL}/dev/getAllContainers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -156,7 +157,7 @@ const AdminTemp = () => {
         throw new Error("Template not found");
       }
 
-      const response = await fetch(`http://localhost:3000/dev/deleteTemplate/${id}`, {
+      const response = await fetch(`${API_URL}/dev/deleteTemplate/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -164,7 +165,7 @@ const AdminTemp = () => {
         },
       });
       if (response.ok) {
-        await fetch("http://localhost:3000/dev/notification", {
+        await fetch(`${API_URL}/dev/notification`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

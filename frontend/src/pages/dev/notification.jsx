@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -20,7 +21,7 @@ const Notifications = () => {
     useEffect(() => {
         const fetchNotifications = async () => {
             try {
-                const response = await fetch("http://localhost:3000/dev/notifications", {
+                const response = await fetch(`${API_URL}/dev/notifications`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -38,7 +39,7 @@ const Notifications = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/dev/notification/${id}`, {
+            const response = await fetch(`${API_URL}/dev/notification/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Content-Type": "application/json",
@@ -66,7 +67,7 @@ const Notifications = () => {
 
     const handleMarkAsRead = async (id) => {
         try {
-            const response = await fetch(`http://localhost:3000/dev/notification/${id}/read`, {
+            const response = await fetch(`${API_URL}/dev/notification/${id}/read`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",

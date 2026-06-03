@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Buffer } from "buffer";
 
@@ -6,7 +7,7 @@ export const fetchUserData = createAsyncThunk(
   "user/fetchUserData",
   async (token, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:3000/user/getprofiledata", {
+      const response = await fetch(`${API_URL}/user/getprofiledata`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token.token}`,
@@ -37,7 +38,7 @@ const fetchUserAnalyticsData = createAsyncThunk(
   "user/fetchUserAnalyticsData",
   async (token, { rejectWithValue }) => {
     try {
-      const response = await fetch("http://localhost:3000/user/getuserdata", {
+      const response = await fetch(`${API_URL}/user/getuserdata`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token.token}`,
@@ -68,7 +69,7 @@ export const updateUserData = createAsyncThunk(
         formData.append("profilePic", selectedFile);
       }
       // console.log("hkj : ", token.token);
-      const response = await fetch("http://localhost:3000/user/addmoredata", {
+      const response = await fetch(`${API_URL}/user/addmoredata`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${token.token}`,

@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import Terminal from "@/components/Terminal";
 import FileSystem from "@/components/FileSystem";
 import CodeEditor from "@/components/CodeEditor";
@@ -25,7 +26,7 @@ export default function Project() {
       // Fetch template name
       try {
         const templateRes = await fetch(
-          `http://localhost:3000/container/templateName/${containerId}`,
+          `${API_URL}/container/templateName/${containerId}`,
           {
             method: "GET",
             headers: {
@@ -44,7 +45,7 @@ export default function Project() {
 
       // Run container
       const res = await fetch(
-        `http://localhost:3000/container/runcontainer/${containerId}`,
+        `${API_URL}/container/runcontainer/${containerId}`,
         {
           method: "GET",
           headers: {

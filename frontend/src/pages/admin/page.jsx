@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bar, Pie } from 'react-chartjs-2';
@@ -36,7 +37,7 @@ const AdminPage = () => {
 
   const fetchTemplates = async () => {
     try {
-      const response = await fetch("http://localhost:3000/dev/getAllTemplates", {
+      const response = await fetch(`${API_URL}/dev/getAllTemplates`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -59,7 +60,7 @@ const AdminPage = () => {
         throw new Error("Email and template ID are required");
       }
 
-      const response = await fetch("http://localhost:3000/admin/addTemplate", {
+      const response = await fetch(`${API_URL}/admin/addTemplate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +100,7 @@ const AdminPage = () => {
         throw new Error("Email and template ID are required");
       }
       
-      const response = await fetch("http://localhost:3000/admin/removeTemplate", 
+      const response = await fetch(`${API_URL}/admin/removeTemplate`, 
         {
           method: "POST",
           headers: {
@@ -166,7 +167,7 @@ const AdminPage = () => {
 
 
   const fetchUsers = async () => {
-    const response = await fetch("http://localhost:3000/admin/getAllUsers", {
+    const response = await fetch(`${API_URL}/admin/getAllUsers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -177,7 +178,7 @@ const AdminPage = () => {
   };
 
   const fetchContainers = async () => {
-    const response = await fetch("http://localhost:3000/admin/getAllContainers", {
+    const response = await fetch(`${API_URL}/admin/getAllContainers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -188,7 +189,7 @@ const AdminPage = () => {
   };
 
   const fetchAuthData = async () => {
-    const response = await fetch("http://localhost:3000/admin/getAllAuth", {
+    const response = await fetch(`${API_URL}/admin/getAllAuth`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -202,7 +203,7 @@ const AdminPage = () => {
     return Promise.all(
       containersData.map(async (container) => {
         try {
-          const response = await fetch(`http://localhost:3000/container/details/${container.id}`, {
+          const response = await fetch(`${API_URL}/container/details/${container.id}`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -234,7 +235,7 @@ const AdminPage = () => {
   const handleStopContainer = async (containerId) => {
     setLoadingAction({ isLoading: true, message: 'Stopping Container' });
     try {
-      const response = await fetch(`http://localhost:3000/container/stop/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/stop/${containerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -264,7 +265,7 @@ const AdminPage = () => {
   const handleStartContainer = async (containerId) => {
     setLoadingAction({ isLoading: true, message: 'Starting Container' });
     try {
-      const response = await fetch(`http://localhost:3000/container/start/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/start/${containerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -296,7 +297,7 @@ const AdminPage = () => {
   const handleDeleteContainer = async (containerId) => {
     setLoadingAction({ isLoading: true, message: 'Deleting Container' });
     try {
-      const response = await fetch(`http://localhost:3000/container/delete/${containerId}`, {
+      const response = await fetch(`${API_URL}/container/delete/${containerId}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -328,7 +329,7 @@ const AdminPage = () => {
   const logoutUser = async (userEmail) => {
     setLoadingAction({ isLoading: true, message: 'Logging Out User' });
     try {
-      const response = await fetch("http://localhost:3000/admin/adminLogout", {
+      const response = await fetch(`${API_URL}/admin/adminLogout`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -361,7 +362,7 @@ const AdminPage = () => {
   const changeRole = async (userEmail) => {
     setLoadingAction({ isLoading: true, message: 'Changing User Role' });
     try {
-      const response = await fetch("http://localhost:3000/admin/roleChange", {
+      const response = await fetch(`${API_URL}/admin/roleChange`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import React, { useState, useEffect } from "react";
@@ -32,7 +33,7 @@ const AdminTempEdit = () => {
   useEffect(() => {
     const fetchTemplates = async () => {
       const currRole = token.role;
-      const endpoint = currRole === 'admin' ? "http://localhost:3000/dev/getAllTemplates" : `http://localhost:3000/dev/getUserTemplates/${token.email}`;
+      const endpoint = currRole === 'admin' ? `${API_URL}/dev/getAllTemplates` : `${API_URL}/dev/getUserTemplates/${token.email}`;
       const response = await fetch(endpoint, {
         method: "GET",
         headers: {
@@ -71,7 +72,7 @@ const AdminTempEdit = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/dev/addNewTemplate", {
+      const response = await fetch(`${API_URL}/dev/addNewTemplate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -86,7 +87,7 @@ const AdminTempEdit = () => {
         setPopupVisible(true);
       }
       // Send notification for template creation
-      await fetch("http://localhost:3000/dev/notification", {
+      await fetch(`${API_URL}/dev/notification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -115,7 +116,7 @@ const AdminTempEdit = () => {
     // console.log(selectedTemplate)
     updateTemplate.id = selectedTemplate;
     try {
-      const response = await fetch("http://localhost:3000/dev/updateTemplate", {
+      const response = await fetch(`${API_URL}/dev/updateTemplate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -130,7 +131,7 @@ const AdminTempEdit = () => {
         setPopupVisible(true);
       }
       // Send notification for template update
-      await fetch("http://localhost:3000/dev/notification", {
+      await fetch(`${API_URL}/dev/notification`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

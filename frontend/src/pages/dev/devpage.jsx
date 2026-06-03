@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from 'react-router-dom';
@@ -53,7 +54,7 @@ const DevPage = () => {
   const fetchTemplate = async () => {
     try {
       const currRole = token.role;
-      const endpoint = currRole === 'admin' ? "http://localhost:3000/dev/getAllTemplates" : `http://localhost:3000/dev/getUserTemplates/${token.email}`;
+      const endpoint = currRole === 'admin' ? `${API_URL}/dev/getAllTemplates` : `${API_URL}/dev/getUserTemplates/${token.email}`;
       const response = await fetch(endpoint, {
         method: "GET",
         headers: {
@@ -68,7 +69,7 @@ const DevPage = () => {
   }
 
   const fetchContainers = async () => {
-    const response = await fetch("http://localhost:3000/dev/getAllContainers", {
+    const response = await fetch(`${API_URL}/dev/getAllContainers`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -138,7 +139,7 @@ const DevPage = () => {
 
   const deleteTemplate = async (id) => {
     try {
-      const response = await fetch(`http://localhost:3000/dev/deleteTemplate/${id}`, {
+      const response = await fetch(`${API_URL}/dev/deleteTemplate/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

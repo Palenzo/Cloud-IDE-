@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { 
@@ -26,7 +27,7 @@ const ContactUs = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:3000/user/addcontactus', {
+      const response = await fetch(`${API_URL}/user/addcontactus`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

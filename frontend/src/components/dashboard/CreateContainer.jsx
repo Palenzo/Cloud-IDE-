@@ -1,3 +1,4 @@
+import { API_URL } from "@/config";
 import React, { useEffect, useState } from "react";
 import {
   Dialog,
@@ -44,7 +45,7 @@ const CreateContButton = ({ templateDefault = 1, className, children }) => {
 
   useEffect(() => {
     async function fetchTemplates() {
-      const res = await fetch("http://localhost:3000/getAllTemplates", {
+      const res = await fetch(`${API_URL}/getAllTemplates`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -87,7 +88,7 @@ const CreateContButton = ({ templateDefault = 1, className, children }) => {
         return;
       }
 
-      const res = await fetch("http://localhost:3000/container/createcontainer", {
+      const res = await fetch(`${API_URL}/container/createcontainer`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
