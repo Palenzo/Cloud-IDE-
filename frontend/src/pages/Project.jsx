@@ -1,4 +1,4 @@
-import { API_URL } from "@/config";
+import { API_URL, CONTAINER_HOST } from "@/config";
 import Terminal from "@/components/Terminal";
 import FileSystem from "@/components/FileSystem";
 import CodeEditor from "@/components/CodeEditor";
@@ -56,7 +56,7 @@ export default function Project() {
       );
       if (res.ok) {
         const data = await res.json();
-        const socket = io(`http://localhost:${data.port}`);
+        const socket = io(`${CONTAINER_HOST}:${data.port}`);
 
         socket.on("connect", () => {
           setSoc(socket);

@@ -1,0 +1,51 @@
+# Single-host deployment for Terminas, including the Docker-powered container
+# feature. Run this on a machine with Docker installed (VPS / EC2 / etc.).
+#
+#   1. Create backend/.env   (copy backend/.env.example, fill CONNECTION_STR etc.)
+#   2. Build the template images:  ./dockerBackend/build-images.sh
+#   3. Set the two PUBLIC_* vars below (or in a root .env) to this host's address
+#   4. docker compose up -d --build
+#
+# See DEPLOY-DOCKER.md for the full runbook (firewall ports, Atlas, templates).
+
+services:
+  redis:
+    image: redis/redis-stack:latest
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+    # Exposed only on the compose network; the backend reaches it as redis:6379.
+
+  backend:
+    build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env          # CONNECTION_STR, JWT_SECRET, NODEMAILER_PASS, DEPLOY_URL
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379   # overrides the local 6380 default
+    ports:
+      - "3000:3000"
+    volumes:
+      # Lets the backend create sibling dev containers on the HOST Docker daemon.
+      # Those containers bind host ports 5000-11000 directly (open them in the firewall).
+      - /var/run/docker.sock:/var/run/docker.sock
+    depends_on:
+      - redis
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        # Public URLs the browser uses. Default to localhost for a local test;
+        # on a real host set PUBLIC_API_URL / PUBLIC_CONTAINER_HOST (root .env).
+        VITE_API_URL: ${PUBLIC_API_URL:-http://localhost:3000}
+        VITE_CONTAINER_HOST: ${PUBLIC_CONTAINER_HOST:-http://localhost}
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  redis-data:

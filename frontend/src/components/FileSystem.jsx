@@ -1,3 +1,4 @@
+import { CONTAINER_HOST } from "@/config";
 import React, { useEffect, useState, useCallback, useRef } from "react";
 import Files from "./Files";
 import { useDispatch, useSelector } from "react-redux";
@@ -153,7 +154,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             setError(null);
             setIsRefreshing(true);
 
-            const res = await fetch(`http://localhost:${port}/project/files`);
+            const res = await fetch(`${CONTAINER_HOST}:${port}/project/files`);
 
             if (!res.ok) {
                 throw new Error(`Failed to fetch files: ${res.statusText}`);
@@ -335,7 +336,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             const cleanPath = filePath.replace(/^\/+/, '');
 
             // Send request to create the file
-            const response = await fetch(`http://localhost:${port}/project/file/create`, {
+            const response = await fetch(`${CONTAINER_HOST}:${port}/project/file/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -370,7 +371,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             const cleanPath = folderPath.replace(/^\/+/, '');
 
             // Send request to create the folder
-            const response = await fetch(`http://localhost:${port}/project/folder/create`, {
+            const response = await fetch(`${CONTAINER_HOST}:${port}/project/folder/create`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -409,7 +410,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             console.log('Sending file delete request:', { filePath, cleanPath });
 
             // Send request to delete the file
-            const response = await fetch(`http://localhost:${port}/project/file/delete`, {
+            const response = await fetch(`${CONTAINER_HOST}:${port}/project/file/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -448,7 +449,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             console.log('Sending folder delete request:', { folderPath, cleanPath });
 
             // Send request to delete the folder
-            const response = await fetch(`http://localhost:${port}/project/folder/delete`, {
+            const response = await fetch(`${CONTAINER_HOST}:${port}/project/folder/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -486,7 +487,7 @@ export default function FileSystem({ socket, onSidebarToggle, isHidden }) {
             const cleanNewPath = newPath.replace(/^\/+/, '');
 
             // Send request to rename the file
-            const response = await fetch(`http://localhost:${port}/project/file/rename`, {
+            const response = await fetch(`${CONTAINER_HOST}:${port}/project/file/rename`, {
                 method: 'PATCH',
                 headers: {
                     'Content-Type': 'application/json',

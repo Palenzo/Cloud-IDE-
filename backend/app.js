@@ -64,8 +64,11 @@ const accessLogStream = rfs.createStream('access.log', {
 app.use(morgan(customLogFormat, { stream: accessLogStream }));
 // app.use(morgan('dev')); // Also log to console in development
 
-// CSRF token endpoint
-app.get('/csrf-token', (req, res) => {
+// CSRF token endpoint.
+// csrfProtection must run on this route so csurf seeds the secret cookie and
+// makes req.csrfToken() available (it is not mounted globally, since the app's
+// requests authenticate via JWT and do not all carry a CSRF header).
+app.get('/csrf-token', csrfProtection, (req, res) => {
     res.json({ csrfToken: req.csrfToken() });
 });
 

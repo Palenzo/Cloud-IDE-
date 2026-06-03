@@ -1,3 +1,4 @@
+import { CONTAINER_HOST } from "@/config";
 import React, { useState, useEffect } from "react";
 import AceEditor from "react-ace";
 import { useDispatch, useSelector } from "react-redux";
@@ -129,7 +130,7 @@ export default function CodeEditor({ socket }) {
 
     async function getFile() {
         try {
-            const res = await fetch(`http://localhost:${port}/project/file`, {
+            const res = await fetch(`${CONTAINER_HOST}:${port}/project/file`, {
                 method: "POST",
                 body: JSON.stringify(currFile),
                 headers: {
@@ -227,7 +228,7 @@ export default function CodeEditor({ socket }) {
         setIsRunning(true);
         try {
             // Get the file path
-            const res = await fetch(`http://localhost:${port}/project/file/find/${currFile.name}`);
+            const res = await fetch(`${CONTAINER_HOST}:${port}/project/file/find/${currFile.name}`);
             if (!res.ok) {
                 throw new Error('Failed to get file path');
             }
